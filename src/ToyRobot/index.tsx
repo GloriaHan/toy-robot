@@ -34,7 +34,7 @@ export default function ToyRobot(): JSX.Element {
   return (
     <XRobotContext.Provider value={{ xValue, setXValue }}>
       <YRobotContext.Provider value={{ yValue, setYValue }}>
-        <Header>Toy Robot</Header>
+        <Header>Chipmunk Robot</Header>
         <Root>
           <ToyWraper>
             <ToyRobotContainer>
@@ -48,9 +48,8 @@ export default function ToyRobot(): JSX.Element {
               <span>Command Instruction:</span>
             </p>
             <p>
-              <span>place(x,y,direction): </span>x and y are integers that
-              relate to a location on the grid. Values that are outside the
-              boundary of the grid should not be allowed.
+              <span>place(x,y,direction): </span>x and y are integers between
+              1-5; direction is north/south/east/west. e.g. place(1,2,east).
             </p>
             <p>
               <span>move(): </span>Moves the robot 1 grid unit in the direction

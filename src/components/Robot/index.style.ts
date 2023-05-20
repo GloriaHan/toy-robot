@@ -14,7 +14,7 @@ justify-content: center;
 `
 export const Img = styled.img`
   display: flex;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   margin: 0;
 `

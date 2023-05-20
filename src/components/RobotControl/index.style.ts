@@ -18,12 +18,34 @@ export const CommandContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin:20px auto;
+  margin: 20px auto;
   border-radius: 5px;
   font-size: 20px;
+  & > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 export const Input = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
+  height: 30px;
+
+  & > input {
+    height: 100%;
+  }
+
+  & > button {
+    width: 80px;
+    height: 36px;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-style: none;
+    border-radius: 3px;
+    background-color: #aaa;
+  }
 `
