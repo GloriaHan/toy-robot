@@ -26,6 +26,21 @@ export const CommandContainer = styled.div`
     justify-content: center;
     align-items: center;
   }
+  & > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 30px;
+    margin: 5px;
+    font-size: 16px;
+    margin: 20px auto;
+    background-color: #aaa;
+    font-size: 16px;
+    font-weight: bold;
+    border-style: none;
+    border-radius: 3px;
+  }
 `
 export const Input = styled.div`
   display: flex;
