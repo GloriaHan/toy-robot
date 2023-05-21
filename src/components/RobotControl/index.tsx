@@ -1,43 +1,44 @@
 import { ButtonContainer, CommandContainer, Input } from './index.style'
 import React, { useState, useContext } from 'react'
 import { RobotContext } from '../../ToyRobot'
+import { GRID_SIZE, CELL_SIZE } from '../../constant'
 
 export default function RobotControl(): JSX.Element {
   const { value, setValue } = useContext(RobotContext)
   const [input, setInput] = useState('')
-  const GRID_SIZE = 5
-  const CELL_SIZE = 80
+  const grid_size = GRID_SIZE
+  const cell_size = CELL_SIZE
 
   const { xValue, yValue, direction } = value
 
   const place = (x: number, y: number, directionInput: string): void => {
     setValue({
-      xValue: (x - 1) * CELL_SIZE,
-      yValue: (y - 1) * CELL_SIZE,
+      xValue: (x - 1) * cell_size,
+      yValue: (y - 1) * cell_size,
       direction: directionInput,
     })
   }
 
   const move = () => {
-    if (direction === 'north' && yValue < GRID_SIZE * CELL_SIZE) {
+    if (direction === 'north' && yValue < grid_size * cell_size) {
       setValue({
         ...value,
-        yValue: yValue + CELL_SIZE,
+        yValue: yValue + cell_size,
       })
     } else if (direction === 'south' && yValue > 0) {
       setValue({
         ...value,
-        yValue: yValue - CELL_SIZE,
+        yValue: yValue - cell_size,
       })
     } else if (direction === 'west' && xValue > 0) {
       setValue({
         ...value,
-        xValue: xValue - CELL_SIZE,
+        xValue: xValue - cell_size,
       })
-    } else if (direction === 'east' && xValue < GRID_SIZE * CELL_SIZE) {
+    } else if (direction === 'east' && xValue < grid_size * cell_size) {
       setValue({
         ...value,
-        xValue: xValue + CELL_SIZE,
+        xValue: xValue + cell_size,
       })
     } else {
       alert('Robot is out of the grid')
@@ -77,7 +78,7 @@ export default function RobotControl(): JSX.Element {
 
   const inputCmd = () => {
     const inputString = input.replace(/\s/g, '')
-    const patternPlace = `^place\\(([1-${GRID_SIZE}]),([1-${GRID_SIZE}]),(north|south|west|east)\\)$`
+    const patternPlace = `^place\\(([1-${grid_size}]),([1-${grid_size}]),(north|south|west|east)\\)$`
     const patternMove = `^move\\(\\)$`
     const patternLeft = `^left\\(\\)$`
     const patternRight = `^right\\(\\)$`
@@ -99,8 +100,8 @@ export default function RobotControl(): JSX.Element {
       changeDirection(inputDirection)
     } else if (new RegExp(patternReport).test(inputString)) {
       alert(
-        `x: ${xValue / CELL_SIZE}, y: ${
-          yValue / CELL_SIZE
+        `x: ${xValue / cell_size}, y: ${
+          yValue / cell_size
         }, direction: ${direction}`
       )
     } else {
@@ -110,10 +111,10 @@ export default function RobotControl(): JSX.Element {
   }
 
   const moveForward = () => {
-    if (yValue >= CELL_SIZE * (GRID_SIZE - 1)) {
+    if (yValue >= cell_size * (grid_size - 1)) {
       alert('Robot has reached the edge of the table')
     } else {
-      setValue({ ...value, yValue: yValue + CELL_SIZE,direction:'north' })
+      setValue({ ...value, yValue: yValue + cell_size, direction: 'north' })
     }
   }
 
@@ -121,7 +122,7 @@ export default function RobotControl(): JSX.Element {
     if (yValue <= 0) {
       alert('Robot has reached the edge of the table')
     } else {
-      setValue({ ...value, yValue: yValue - CELL_SIZE,direction:'south' })
+      setValue({ ...value, yValue: yValue - cell_size, direction: 'south' })
     }
   }
 
@@ -129,15 +130,15 @@ export default function RobotControl(): JSX.Element {
     if (xValue <= 0) {
       alert('Robot has reached the edge of the table')
     } else {
-      setValue({ ...value, xValue: xValue - CELL_SIZE,direction:'west' })
+      setValue({ ...value, xValue: xValue - cell_size, direction: 'west' })
     }
   }
 
   const moveRight = () => {
-    if (xValue >= CELL_SIZE * (GRID_SIZE - 1)) {
+    if (xValue >= cell_size * (grid_size - 1)) {
       alert('Robot has reached the edge of the table')
     } else {
-      setValue({ ...value, xValue: xValue + CELL_SIZE,direction:'east' })
+      setValue({ ...value, xValue: xValue + cell_size, direction: 'east' })
     }
   }
 
@@ -160,11 +161,15 @@ export default function RobotControl(): JSX.Element {
           />
           <button onClick={inputCmd}>GO</button>
         </Input>
-        <button onClick={() => setValue({ xValue: 0, yValue: 0, direction:'east'})}>RESET</button>
+        <button
+          onClick={() => setValue({ xValue: 0, yValue: 0, direction: 'east' })}
+        >
+          RESET
+        </button>
         <p>
           Position:
           <span>
-            X: {value.xValue / CELL_SIZE + 1}, Y: {value.yValue / CELL_SIZE + 1}
+            X: {value.xValue / cell_size + 1}, Y: {value.yValue / cell_size + 1}
             , Direction: {direction}
           </span>
         </p>
