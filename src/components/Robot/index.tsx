@@ -33,7 +33,6 @@ export default function Robot(): JSX.Element {
   left = `${xValue}px`
   bottom = `${yValue}px`
 
-  console.log(left, bottom)
   return (
     <Root style={{ left, bottom }}>
       <Img
