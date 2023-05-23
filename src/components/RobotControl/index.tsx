@@ -79,7 +79,11 @@ export default function RobotControl(): JSX.Element {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowUp') {
+      if(e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault()
+      }
+      
+      if (e.key === 'ArrowUp') {  
         moveForward()
       } else if (e.key === 'ArrowDown') {
         moveBackward()
