@@ -1,5 +1,5 @@
 import { ButtonContainer, CommandContainer, Input } from './index.style'
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { RobotContext } from '../../ToyRobot'
 import { GRID_SIZE, CELL_SIZE } from '../../constant'
 
@@ -71,10 +71,30 @@ export default function RobotControl(): JSX.Element {
   }
 
   const enterChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(e)
     if (e.key === 'Enter') {
       inputCmd()
     }
   }
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp') {
+        moveForward()
+      } else if (e.key === 'ArrowDown') {
+        moveBackward()
+      } else if (e.key === 'ArrowLeft') {
+        moveLeft()
+      } else if (e.key === 'ArrowRight') {
+        moveRight()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  })
+
 
   const inputCmd = () => {
     const inputString = input.replace(/\s/g, '')
